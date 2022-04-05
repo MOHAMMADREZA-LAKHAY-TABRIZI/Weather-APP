@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="Weather.css">
+
+    <title>دمای هوا</title>
+</head>
+
+<body>
+    <div class="import Block centered">
+        <h1>Current </h1>
+        <h1>Weather</h1>
+        <h3><label for="">Search Location :</label></h3>
+        <input type="text" id="city">
+        <div>
+            <button type="button" class="btn btn-primary" id="search" onclick="callFirstAPI()">Search</button>
+        </div>
+    </div>
+    <div class="info Block">
+
+    </div>
+</body>
+<script src="Weather.js"></script>
+
+</html>
