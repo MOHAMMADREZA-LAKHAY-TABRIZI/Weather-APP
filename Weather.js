@@ -9,7 +9,7 @@ function responseTraversal(response) {
         lat = item.lat;
         lon = item.lon;
         console.log(item);
-        // return lat.concat(',', lon);
+       
     }
 }
 
@@ -38,5 +38,5 @@ const callFirstAPI = () => {
         then((geoResponseJSON) => responseTraversal(geoResponseJSON));
 
     }
-    // callSecoundAPI();
+     callSecoundAPI();
 }
