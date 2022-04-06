@@ -1,6 +1,6 @@
 const apiKey = 'cc28b63a7f7d2340f4e7ff708cd45b87';
-let lat;
-let lon;
+// let lat;
+// let lon;
 const cty = 'Country : ';
 const situ = 'Situation : ';
 let desc;
@@ -8,14 +8,18 @@ const temp = 'Temperature : ';
 const wisp = 'Wind Speed :';
 
 function responseTraversal(response) {
-
+    let geo;
+    let lat;
+    let lon;
     for (const item of response) {
 
+        // geo = item.lat + '-' + item.lon;
         lat = item.lat;
         lon = item.lon;
 
     }
-
+    geo = lat + '-' + lon;
+    return geo;
 }
 
 function createHTMLElement(response) {
@@ -53,10 +57,16 @@ function createHTMLElement(response) {
 
 }
 
-function callSecoundAPI() {
+function callSecoundAPI(geoInputString) {
 
+    let lat;
+    let lon;
+    const geoPos = geoInputString.split('-');
+    lat = geoPos[0];
+    lon = geoPos[1];
+    console.log(`lat:${lat}`);
+    console.log(`lon:${lon}`);
     const addres = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
-    console.log('callSecoundAPI :1');
     fetch(addres).
     then((cityTempString) => cityTempString.json()).
     then((cityTempJSON) => createHTMLElement(cityTempJSON));
@@ -65,6 +75,7 @@ function callSecoundAPI() {
 
 
 const callFirstAPI = () => {
+    let geo;
 
     const city = document.getElementById("city").value;
 
@@ -74,9 +85,13 @@ const callFirstAPI = () => {
             const addres = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
             fetch(addres).
             then((geoResponseString) => geoResponseString.json()).
-            then((geoResponseJSON) => responseTraversal(geoResponseJSON));
+            then((geoResponseJSON) => {
 
-            resolve();
+                geo = responseTraversal(geoResponseJSON);
+                console.log(geo, 1);
+            });
+
+            resolve(geo);
 
 
         } else {
@@ -85,16 +100,12 @@ const callFirstAPI = () => {
     });
 
     promise.
-    then(function() {
-        callSecoundAPI();
+    then(function(geoInput) {
+        console.log('resolve');
+        callSecoundAPI(geoInput);
     }).
     catch(function() {
         console.log('Some error has occurred');
     });
-
-    // setTimeout(() => {
-
-    //     callSecoundAPI();
-    // }, 3000);
 
 }
