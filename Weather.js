@@ -16,16 +16,10 @@ function responseTraversal(response) {
 
     }
     // console.log('responseTraversal :2 =>3');
+
 }
 
 function createHTMLElement(response) {
-
-    // console.log('createHTMLElement 3');
-    // console.log(response.main);
-    // console.log(response.main.temp);
-    // console.log(response.main.feels_like);
-    // console.log(response.wind.speed);
-    // console.log(response.sys.country);
 
     for (const item of response.weather) {
         desc = item.description;
@@ -72,7 +66,7 @@ function callSecoundAPI() {
 
 const callFirstAPI = () => {
 
-    // console.log('callFirstAPI :1');
+
     const city = document.getElementById("city").value;
     if (city != '') {
 
@@ -80,11 +74,11 @@ const callFirstAPI = () => {
         fetch(addres).
         then((geoResponseString) => geoResponseString.json()).
         then((geoResponseJSON) => responseTraversal(geoResponseJSON));
-        // console.log('callFirstAPI fetch :3 =>2');
+
 
     }
     setTimeout(() => {
-        // console.log(`callFirstAPI  x:${lat} , y:${lon}`);
+
         callSecoundAPI();
     }, 3000);
 
