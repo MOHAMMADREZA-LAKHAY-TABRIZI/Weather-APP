@@ -27,8 +27,9 @@ body {
     width: 50%;
     position: fixed;
     z-index: 1;
-    top: 0;
+    top: 0px;
     font-size: 170%;
+    padding: 60px;
 }
 
 .import {
@@ -37,4 +38,8 @@ body {
 
 .info {
     left: 0;
+}
+
+#city {
+    /* border-radius: 6%; */
 }
