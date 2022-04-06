@@ -15,7 +15,7 @@ function responseTraversal(response) {
         lon = item.lon;
 
     }
-    // console.log('responseTraversal :2 =>3');
+  
 
 }
 
@@ -61,7 +61,7 @@ function callSecoundAPI() {
     fetch(addres).
     then((cityTempString) => cityTempString.json()).
     then((cityTempJSON) => createHTMLElement(cityTempJSON));
-    console.log('callSecoundAPI fetch :2');
+   
 }
 
 const callFirstAPI = () => {
