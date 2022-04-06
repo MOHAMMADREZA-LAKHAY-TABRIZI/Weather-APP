@@ -15,7 +15,6 @@ function responseTraversal(response) {
         lon = item.lon;
 
     }
-  
 
 }
 
@@ -61,25 +60,41 @@ function callSecoundAPI() {
     fetch(addres).
     then((cityTempString) => cityTempString.json()).
     then((cityTempJSON) => createHTMLElement(cityTempJSON));
-   
+
 }
+
 
 const callFirstAPI = () => {
 
-
     const city = document.getElementById("city").value;
-    if (city != '') {
 
-        const addres = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
-        fetch(addres).
-        then((geoResponseString) => geoResponseString.json()).
-        then((geoResponseJSON) => responseTraversal(geoResponseJSON));
+    var promise = new Promise(function(resolve, reject) {
+        if (city != '') {
+
+            const addres = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`;
+            fetch(addres).
+            then((geoResponseString) => geoResponseString.json()).
+            then((geoResponseJSON) => responseTraversal(geoResponseJSON));
+
+            resolve();
 
 
-    }
-    setTimeout(() => {
+        } else {
+            reject();
+        }
+    });
 
+    promise.
+    then(function() {
         callSecoundAPI();
-    }, 3000);
+    }).
+    catch(function() {
+        console.log('Some error has occurred');
+    });
+
+    // setTimeout(() => {
+
+    //     callSecoundAPI();
+    // }, 3000);
 
 }
