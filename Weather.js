@@ -18,7 +18,7 @@ function responseTraversal(response) {
         lon = item.lon;
 
     }
-    geo = lat + '-' + lon;
+    geo = { 'lat': lat, 'lon': lon };
     return geo;
 }
 
@@ -61,9 +61,11 @@ function callSecoundAPI(geoInputString) {
 
     let lat;
     let lon;
-    const geoPos = geoInputString.split('-');
-    lat = geoPos[0];
-    lon = geoPos[1];
+    // const geoPos = geoInputString.split('-');
+    // lat = geoPos[0];
+    // lon = geoPos[1];
+    lat = parseFloat(geoInputString.lat);
+    lon = parseFloat(geoInputString.lon);
     console.log(`lat:${lat}`);
     console.log(`lon:${lon}`);
     const addres = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
@@ -86,9 +88,10 @@ const callFirstAPI = () => {
             fetch(addres).
             then((geoResponseString) => geoResponseString.json()).
             then((geoResponseJSON) => {
+                debugger;
 
                 geo = responseTraversal(geoResponseJSON);
-                console.log(geo, 1);
+                console.log(geo);
             });
 
             resolve(geo);
@@ -99,12 +102,10 @@ const callFirstAPI = () => {
         }
     });
 
-    promise.
-    then(function(geoInput) {
+    promise.then(function(geoInput) {
         console.log('resolve');
         callSecoundAPI(geoInput);
-    }).
-    catch(function() {
+    }).catch(function() {
         console.log('Some error has occurred');
     });
 
