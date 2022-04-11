@@ -1,6 +1,5 @@
 const apiKey = 'cc28b63a7f7d2340f4e7ff708cd45b87';
-// let lat;
-// let lon;
+
 const cty = 'Country : ';
 const situ = 'Situation : ';
 let desc;
@@ -13,7 +12,7 @@ function responseTraversal(response) {
     let lon;
     for (const item of response) {
 
-        // geo = item.lat + '-' + item.lon;
+
         lat = item.lat;
         lon = item.lon;
 
@@ -61,9 +60,7 @@ function callSecoundAPI(geoInputString) {
 
     let lat;
     let lon;
-    // const geoPos = geoInputString.split('-');
-    // lat = geoPos[0];
-    // lon = geoPos[1];
+
     lat = parseFloat(geoInputString.lat);
     lon = parseFloat(geoInputString.lon);
     console.log(`lat:${lat}`);
@@ -92,9 +89,8 @@ const callFirstAPI = () => {
 
                 geo = responseTraversal(geoResponseJSON);
                 console.log(geo);
+                resolve(geo);
             });
-
-            resolve(geo);
 
 
         } else {
